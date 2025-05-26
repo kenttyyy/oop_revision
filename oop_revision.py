@@ -66,3 +66,8 @@ class QuizCreator:
                 break
             else:
                 print(f"{self.colors.RED}Invalid input. Please enter 1 or 2.")
+
+# [6] finalize main program with run logic and file writing
+if __name__ == "__main__":
+    quiz_creator = QuizCreator()
+    quiz_creator.run()
