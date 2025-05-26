@@ -82,7 +82,7 @@ class AnsiColor:
     MAGENTA = "\033[95m"
     BOLD = "\033[1m"
     RESET = "\033[0m"
-    
+
 class Question:
     def __init__(self, text, choices, correct_answer):
         self.text = text
@@ -95,3 +95,29 @@ class Question:
             print(f"{key}. {value}")
         user_answer = input(f"{colors.MAGENTA}Your answer (A/B/C/D): ").strip().upper()
         return user_answer == self.correct_answer, self.correct_answer
+
+class QuizLoader:
+    def __init__(self, filename):
+        self.filename = filename
+
+    def load_questions(self):
+        with open(self.filename, "r") as file:
+            lines = [line.strip() for line in file if line.strip() != ""]
+
+        questions = []
+        i = 0
+        while i < len(lines):
+            if lines[i].startswith("Question:"):
+                text = lines[i][len("Question: "):]
+                choices = {
+                    "A": lines[i+1][len("A. "):],
+                    "B": lines[i+2][len("B. "):],
+                    "C": lines[i+3][len("C. "):],
+                    "D": lines[i+4][len("D. "):],
+                }
+                correct = lines[i+5][len("Correct Answer: "):]
+                questions.append(Question(text, choices, correct))
+                i += 6
+            else:
+                i += 1
+        return questions
