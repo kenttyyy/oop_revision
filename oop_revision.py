@@ -19,3 +19,10 @@ class Question:
             "D": choice_d
         }
         self.correct_answer = correct_answer
+
+    def save_to_file(self, filename="quiz_questions.txt"):
+        with open(filename, "a") as file:
+            file.write(f"Question: {self.text}\n")
+            for key, value in self.choices.items():
+                file.write(f"{key}. {value}\n")
+            file.write(f"Correct Answer: {self.correct_answer}\n\n")
