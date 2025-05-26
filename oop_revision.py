@@ -53,3 +53,16 @@ class QuizCreator:
 
         question = Question(question_text, choice_a, choice_b, choice_c, choice_d, correct)
         question.save_to_file()
+
+    def run(self):
+        while True:
+            self.display_menu()
+            choice = self.get_user_choice()
+
+            if choice == 1:
+                self.create_question()
+            elif choice == 2:
+                print(f"{self.colors.BOLD}{self.colors.MAGENTA}Exiting the Quiz Creator.")
+                break
+            else:
+                print(f"{self.colors.RED}Invalid input. Please enter 1 or 2.")
