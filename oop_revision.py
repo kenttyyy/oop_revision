@@ -42,3 +42,14 @@ class QuizCreator:
             return int(input(f"{self.colors.MAGENTA}Enter your choice 1 or 2: "))
         except ValueError:
             return -1
+
+    def create_question(self):
+        question_text = input(f"{self.colors.BOLD}{self.colors.GREEN}Enter a question: ")
+        choice_a = input(f"{self.colors.CYAN}Enter Choice A: ")
+        choice_b = input(f"{self.colors.CYAN}Enter Choice B: ")
+        choice_c = input(f"{self.colors.CYAN}Enter Choice C: ")
+        choice_d = input(f"{self.colors.CYAN}Enter Choice D: ")
+        correct = input(f"{self.colors.CYAN}Enter the correct answer: ")
+
+        question = Question(question_text, choice_a, choice_b, choice_c, choice_d, correct)
+        question.save_to_file()
