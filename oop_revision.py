@@ -82,3 +82,16 @@ class AnsiColor:
     MAGENTA = "\033[95m"
     BOLD = "\033[1m"
     RESET = "\033[0m"
+    
+class Question:
+    def __init__(self, text, choices, correct_answer):
+        self.text = text
+        self.choices = choices
+        self.correct_answer = correct_answer.upper()
+
+    def ask(self, number, colors):
+        print(f"\n{colors.BOLD}{colors.CYAN}Question {number}: {self.text}")
+        for key, value in self.choices.items():
+            print(f"{key}. {value}")
+        user_answer = input(f"{colors.MAGENTA}Your answer (A/B/C/D): ").strip().upper()
+        return user_answer == self.correct_answer, self.correct_answer
