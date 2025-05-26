@@ -144,3 +144,9 @@ class QuizRunner:
                 print(f"{self.colors.RED}Incorrect! The correct answer was {correct_answer}.")
 
         print(f"\n{self.colors.BOLD}{self.colors.YELLOW}Quiz completed! Your score: {self.score}/{len(self.questions)}{self.colors.RESET}")
+
+if __name__ == "__main__":
+    loader = QuizLoader("quiz_questions.txt")
+    questions = loader.load_questions()
+    quiz = QuizRunner(questions)
+    quiz.run()
