@@ -121,3 +121,26 @@ class QuizLoader:
             else:
                 i += 1
         return questions
+
+class QuizRunner:
+    def __init__(self, questions):
+        self.questions = questions
+        self.colors = AnsiColor()
+        self.score = 0
+
+    def run(self):
+        if not self.questions:
+            print(f"{self.colors.RED}No questions found. Please add questions using the Quiz Creator.")
+            return
+
+        random.shuffle(self.questions)
+
+        for i, question in enumerate(self.questions, 1):
+            correct, correct_answer = question.ask(i, self.colors)
+            if correct:
+                print(f"{self.colors.GREEN}Correct!")
+                self.score += 1
+            else:
+                print(f"{self.colors.RED}Incorrect! The correct answer was {correct_answer}.")
+
+        print(f"\n{self.colors.BOLD}{self.colors.YELLOW}Quiz completed! Your score: {self.score}/{len(self.questions)}{self.colors.RESET}")
